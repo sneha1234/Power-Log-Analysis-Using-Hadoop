@@ -1,0 +1,37 @@
+.navbar-custom {
+	background-color:#FFFFFF;
+ 	color:#660024;
+    border-radius:0;
+   
+}
+.btn-custom {
+	background-color:#660024;
+	border-radius:4;
+	border-color:#FFFFFF;
+}
+.btn-custom:hover{
+     background: #FFFFFF;
+     color:#660024
+}
+.jumbotron{
+	background-color:#660024;
+	height:100vh;
+	width:100vw;
+	
+	
+}
+.left-pad{
+	padding-left:50px;
+}
+.container{
+	padding-left:0px;
+	margin-left:0px;
+}
+.lipad{
+	padding-left:230px;
+	text-align: center;
+}
+.ulpad{
+	padding-left:350px;
+	text-align: center;
+}

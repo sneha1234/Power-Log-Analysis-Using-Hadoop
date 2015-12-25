@@ -1,0 +1,27 @@
+.navbar-custom {
+	background-color:#FFFFFF;
+    
+  	border-radius:0;
+}
+.btn-custom {
+	background-color:#660024;
+	border-radius:4;
+	border-color:#FFFFFF;
+}
+.jumbotron{
+	background-color:#660024;
+	
+	
+	
+}
+.container{
+	padding-left:0px;
+	margin-left:0px;
+}
+.lipad{
+	padding-left:30px;
+	
+}
+.ulpad{
+	padding-left:130px;
+}

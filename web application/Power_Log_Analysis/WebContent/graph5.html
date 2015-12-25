@@ -1,0 +1,311 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>D3.js Slider Examples</title>
+  <link rel="stylesheet" href="d3.slider.css" />  
+  <style>
+
+    body {
+      font-family: Verdana,Arial,sans-serif;
+    }
+
+    h2 {
+    	font-size: 1.2em;
+    	margin: 60px 0 5px 0;
+    }
+
+	.wrapper div {
+		margin: 35px 0;
+	}
+
+    .wrapper {
+      width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #slider7 {
+    	height: 250px;
+    }
+
+
+  </style>
+</head>
+<body>
+	<div id="pieChart"></div>
+
+  <div class="wrapper">
+
+  	
+
+    
+    <h2>Slider with slide event: <span id="slider3text">0</span></h2>
+    
+    <div id="slider3"></div>
+
+    
+  </div>
+  <input type="file" name="file" id="file">
+
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.4/d3.min.js"></script>
+<script src="d3pie.min.js"></script>
+  <script src="d3.slider.js"></script>
+  <script>
+  var sel;
+   
+
+    d3.select('#slider3').call(d3.slider().axis(true).min(1381962637).max(1381962731).step(1).on("slide", function(evt, value) {
+      d3.select('#slider3text').text(value);
+      sel = value;
+      //display();
+    }));
+
+/*function display(){
+    alert(sel);
+}*/
+   document.getElementById('file').onchange = function(){
+
+  
+
+  var file = this.files[0];
+
+  var reader = new FileReader();
+  reader.onload = function(progressEvent){
+    // Entire file
+    //console.log(this.result);
+
+    // By lines
+    var lines = this.result.split('\n');
+
+    for(var line = 0; line < lines.length; line++){
+      var temp = lines[line].split(',')
+      //alert(temp[1]);
+      //console.log(temp[0]);
+      if (sel == temp[0]){
+      console.log(lines[line]);
+
+var pie = new d3pie("pieChart", {
+	"header": {
+		"title": {
+			"text": "Power Breakdown",
+			"fontSize": 24,
+			"font": "open sans"
+		},
+		"subtitle": {
+			"color": "#999999",
+			"fontSize": 12,
+			"font": "open sans"
+		},
+		"titleSubtitlePadding": 9
+	},
+	"footer": {
+		"color": "#999999",
+		"fontSize": 10,
+		"font": "open sans",
+		"location": "bottom-left"
+	},
+	"size": {
+		"canvasHeight": 600,
+		"canvasWidth": 800,
+		"pieOuterRadius": "90%"
+	},
+	"data": {
+		"sortOrder": "value-desc",
+		"content": [
+			{
+				"label": "P_PKG",
+				"value": parseInt(temp[2]),
+				"color": "#0066cc"
+			},
+			{
+				"label": "P_PP0",
+				"value": parseInt(temp[3]),
+				"color": "#003366"
+			},
+			{
+				"label": "P_DRAM",
+				"value": parseInt(temp[4]),
+				"color": "#336600"
+			},
+			{
+				"label": "P_PKG8",
+				"value": parseInt(temp[5]),
+				"color": "#669966"
+			},
+			{
+				"label": "P_PP08",
+				"value": parseInt(temp[6]),
+				"color": "#ff0000"
+
+			},
+			{
+				"label": "P_DRAM8",
+				"value": parseInt(temp[7]),
+				"color": "#ffff00"
+
+			}
+
+		]
+	},
+	"labels": {
+		"outer": {
+			"pieDistance": 32
+		},
+		"inner": {
+			"hideWhenLessThanPercentage": 3
+		},
+		"mainLabel": {
+			"fontSize": 11
+		},
+		"percentage": {
+			"color": "#ffffff",
+			"decimalPlaces": 0
+		},
+		"value": {
+			"color": "#adadad",
+			"fontSize": 11
+		},
+		"lines": {
+			"enabled": true
+		},
+		"truncation": {
+			"enabled": true
+		}
+	},
+	"tooltips": {
+		"enabled": true,
+		"type": "placeholder",
+		"string": "{label}: {value}, {percentage}%"
+	},
+	"effects": {
+		"pullOutSegmentOnClick": {
+			"effect": "linear",
+			"speed": 400,
+			"size": 8
+		}
+	},
+	"misc": {
+		"gradient": {
+			"enabled": true,
+			"percentage": 100
+		}
+	}
+});
+
+  }
+    }
+    //console.log(sel);
+  };
+  reader.readAsText(file);
+};
+
+/*var pie = new d3pie("pieChart", {
+	"header": {
+		"title": {
+			"text": "Power Breakdown",
+			"fontSize": 24,
+			"font": "open sans"
+		},
+		"subtitle": {
+			"color": "#999999",
+			"fontSize": 12,
+			"font": "open sans"
+		},
+		"titleSubtitlePadding": 9
+	},
+	"footer": {
+		"color": "#999999",
+		"fontSize": 10,
+		"font": "open sans",
+		"location": "bottom-left"
+	},
+	"size": {
+		"canvasHeight": 600,
+		"canvasWidth": 800,
+		"pieOuterRadius": "90%"
+	},
+	"data": {
+		"sortOrder": "value-desc",
+		"content": [
+			{
+				"label": "P_PKG",
+				"value": 18110.86,
+				"color": "#0066cc"
+			},
+			{
+				"label": "P_PP0",
+				"value": 15298.07,
+				"color": "#003366"
+			},
+			{
+				"label": "P_DRAM",
+				"value": 157.96,
+				"color": "#336600"
+			},
+			{
+				"label": "GPU",
+				"value": 59905.31,
+				"color": "#669966"
+			}
+		]
+	},
+	"labels": {
+		"outer": {
+			"pieDistance": 32
+		},
+		"inner": {
+			"hideWhenLessThanPercentage": 3
+		},
+		"mainLabel": {
+			"fontSize": 11
+		},
+		"percentage": {
+			"color": "#ffffff",
+			"decimalPlaces": 0
+		},
+		"value": {
+			"color": "#adadad",
+			"fontSize": 11
+		},
+		"lines": {
+			"enabled": true
+		},
+		"truncation": {
+			"enabled": true
+		}
+	},
+	"tooltips": {
+		"enabled": true,
+		"type": "placeholder",
+		"string": "{label}: {value}, {percentage}%"
+	},
+	"effects": {
+		"pullOutSegmentOnClick": {
+			"effect": "linear",
+			"speed": 400,
+			"size": 8
+		}
+	},
+	"misc": {
+		"gradient": {
+			"enabled": true,
+			"percentage": 100
+		}
+	}
+});*/
+
+
+
+
+  </script>
+<body>
+
+<!-- <div id="pieChart"></div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.4/d3.min.js"></script>
+<script src="https://github.com/benkeen/d3pie/blob/master/d3pie/d3pie.min.js"></script> -->
+
+
+</body>
+</html>
